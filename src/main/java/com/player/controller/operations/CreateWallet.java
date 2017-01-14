@@ -13,24 +13,22 @@ import java.io.IOException;
  * Created by root_pc on 1/14/2017.
  */
 
-@WebServlet("/deposit")
-public class Deposit extends HttpServlet{
+@WebServlet("/createWallet")
+public class CreateWallet extends HttpServlet{
 
     private static final long serialVersionUID = 1L;
 
-    public Deposit() {
+    public CreateWallet() {
         super();
     }
 
 
     protected void doGet(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
         int playerId = Integer.parseInt(request.getParameter("player_id"));
-        double amount = Double.parseDouble(request.getParameter("amount"));
-        if(amount >= 0) {
-            DBServices dbServices = new DBServices();
-            int code = dbServices.updateWallet(playerId,amount);
-            System.out.println(code);
-        }
+        String walletName = request.getParameter("wallet_name");
+        DBServices dbServices = new DBServices();
+        int code = dbServices.createWallet(playerId,walletName);
+        System.out.println(code);
     }
 
 

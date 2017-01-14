@@ -23,10 +23,12 @@
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
         <module name="PlayerWalletService" />
+        <module name="PlayerWalletServices" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="PlayerWalletService" target="1.5" />
+      <module name="PlayerWalletServices" target="1.5" />
     </bytecodeTargetLevel>
   </component>
 </project>

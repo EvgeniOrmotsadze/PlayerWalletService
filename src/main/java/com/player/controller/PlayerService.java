@@ -25,7 +25,6 @@ public class PlayerService extends HttpServlet{
         protected void doGet(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
             RequestDispatcher dispatcher = request.getRequestDispatcher("home-wallet.jsp");
             dispatcher.forward(request, response);
-
         }
 
 

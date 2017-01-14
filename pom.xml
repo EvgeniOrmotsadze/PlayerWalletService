@@ -7,15 +7,28 @@
     <groupId>com.player.wallet</groupId>
     <artifactId>wallet</artifactId>
     <version>1.0</version>
+    <packaging>war</packaging>
 
     <dependencies>
+
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
             <version>3.0.1</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>9.4-1200-jdbc41</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-dbcp</groupId>
+            <artifactId>commons-dbcp</artifactId>
+            <version>1.4</version>
+        </dependency>
     </dependencies>
-    <packaging>war</packaging>
+
 
 
 

@@ -1,3 +1,8 @@
-com\player\controller\DepositServlet.class
+com\player\controller\operations\CreateWallet.class
+com\player\repository\DBProvider.class
+com\player\controller\operations\Deposit.class
+com\player\controller\operations\RetrievalBalance.class
+com\player\repository\DBServices.class
+com\player\controller\operations\Withdraw.class
 com\player\model\Wallet.class
 com\player\controller\PlayerService.class

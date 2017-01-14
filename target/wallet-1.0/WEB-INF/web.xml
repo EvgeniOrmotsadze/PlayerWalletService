@@ -11,8 +11,10 @@
         <servlet-class>com.player.controller.PlayerService</servlet-class>
     </servlet>
 
+
     <servlet-mapping>
         <servlet-name>playerService</servlet-name>
         <url-pattern>*.html</url-pattern>
     </servlet-mapping>
+
 </web-app>

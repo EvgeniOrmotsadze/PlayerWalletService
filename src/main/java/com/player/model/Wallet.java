@@ -9,11 +9,12 @@ public class Wallet {
     private long id;
     private long playerId;
     private double balance;
+    private String name;
 
 
     public Wallet(){}
 
-    public void createWallet(long playerId, int balance){
+    public void createWallet(long playerId, double balance){
 
     }
 
@@ -34,29 +35,30 @@ public class Wallet {
         this.playerId = playerId;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public double getBalance(){
         return this.balance;
     }
 
-    public int deposit(double amount){
-        if(amount > 0) {
-            this.balance += amount;
-            return 0;
-        }else {
-            return -1;
-        }
+
+    public void setBalance(double balance){
+        this.balance = balance;
     }
 
-    public int withdrawal(double amount){
-        if(this.balance < amount ||amount <= 0 ){
-            return  -1;
-        }else{
-            this.balance -= amount;
-            return 0;
-        }
+    public void deposit(double amount){
+        this.balance += amount;
     }
 
+    public void withdraw(double amount){
+        this.balance -= amount;
+    }
 
     @Override
     public String toString() {
