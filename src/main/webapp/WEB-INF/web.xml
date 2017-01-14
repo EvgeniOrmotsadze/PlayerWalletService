@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!DOCTYPE web-app
+        PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+        "http://java.sun.com/dtd/web-app_2_3.dtd">
+
+<web-app>
+
+    <servlet>
+        <servlet-name>playerService</servlet-name>
+        <servlet-class>com.player.controller.PlayerService</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>deposit</servlet-name>
+        <servlet-class>com.player.controller.operations.Deposit</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>playerService</servlet-name>
+        <url-pattern>*.html</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>deposit</servlet-name>
+        <url-pattern>/deposit</url-pattern>
+    </servlet-mapping>
+</web-app>
