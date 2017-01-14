@@ -3,5 +3,6 @@
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/src/main/webapp" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/src/main/webapp/js/jquery-1.10.2.js" charset="windows-1252" />
   </component>
 </project>

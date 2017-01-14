@@ -28,7 +28,7 @@ public class RetrievalBalance extends HttpServlet {
         int playerId = Integer.parseInt(request.getParameter("player_id"));
         WalletService walletService = new WalletService(playerId, new DatabaseServiceImpl());
         double amount = walletService.retrievalBalance();
-        System.out.println(amount);
+        response.getWriter().write(amount+ "");
     }
 
 

@@ -2,7 +2,8 @@ package com.player.service;
 
 import com.player.model.Wallet;
 import com.player.repository.DatabaseService;
-import com.player.repository.DatabaseServiceImpl;
+
+import java.sql.SQLException;
 
 /**
  * Created by root_pc on 1/14/2017.
@@ -20,7 +21,7 @@ public class WalletService {
         this.memoryCache = MemoryCache.getInstance();
     }
 
-    public int createWallet(String walletName){
+    public void createWallet(String walletName) throws Exception {
         Wallet wallet = new Wallet();
         wallet.setPlayerId(playerId);
         wallet.setName(walletName);
@@ -29,26 +30,26 @@ public class WalletService {
         memoryCache.putWallet(playerId, wallet);
 
         //create in DB
-        DatabaseServiceImpl dbServices = new DatabaseServiceImpl();
-        return dbServices.createWallet(wallet);
+        dbServices.createWallet(wallet);
     }
 
-    public void deposit(double amount){
+    public void deposit(double amount) throws SQLException {
         if (amount < 0) {
             throw new IllegalArgumentException("Negative deposit doesn't supported");
         }
 
         //update in memory
         Wallet wallet = this.memoryCache.getWallet(playerId);
-        wallet.setBalance(wallet.getBalance() + amount);
-
-        //update in DB
-        dbServices.updateWallet(wallet);
+        synchronized (wallet) {  // for thread safe
+            wallet.setBalance(wallet.getBalance() + amount);
+            //update in DB
+            dbServices.updateWallet(wallet);
+        }
     }
 
-    public void withdraw(double amount){
+    public void withdraw(double amount) throws SQLException {
         if (amount < 0) {
-            throw new IllegalArgumentException("Positive withdraw doesn't supported");
+            throw new IllegalArgumentException("Negative withdraw doesn't supported");
         }
 
         Wallet wallet = this.memoryCache.getWallet(playerId);
@@ -56,16 +57,18 @@ public class WalletService {
         if (amount > wallet.getBalance()) {
             throw new IllegalArgumentException("Not enough balance");
         }
-
         //update in memory
-        wallet.setBalance(wallet.getBalance() - amount);
-
-        //update in DB
-        dbServices.updateWallet(wallet);
+        synchronized (wallet) { // for thread safe
+            wallet.setBalance(wallet.getBalance() - amount);
+            //update in DB
+            dbServices.updateWallet(wallet);
+        }
     }
 
+    /*
+     * retrieve from memory
+     */
     public Double retrievalBalance(){
-        //retrieve from memory
         Wallet wallet = this.memoryCache.getWallet(playerId);
         return wallet.getBalance();
     }

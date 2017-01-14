@@ -8,9 +8,13 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title></title>
+    <script src="/js/jquery-1.10.2.js"></script>
+    <script src="/js/controller.js"></script>
+    <title>Player Wallet Service</title>
 </head>
 <body>
-    <h1>Hello Beatch</h1>
+    <h1>Player Wallet</h1>
+    <div style="float: left"> <input id="player_id_input" type="number" > </input> <button id="player_search">Search</button> </div>
+    <div style="float:left"> <button id="create_new_wallet">Create Wallet</button></div>
 </body>
 </html>

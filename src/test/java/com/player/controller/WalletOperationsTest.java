@@ -1,6 +1,6 @@
 package com.player.controller;
 
-import com.player.repository.DatabaseServiceImpl;
+import com.player.repository.DatabaseService;
 import com.player.service.WalletService;
 import org.junit.Before;
 import org.junit.Test;
@@ -16,7 +16,7 @@ import static org.junit.Assert.assertEquals;
 
 public class WalletOperationsTest {
 
-    @Mock private DatabaseServiceImpl dbServices;
+    @Mock private DatabaseService dbServices;
 
 
     @Before
@@ -25,16 +25,16 @@ public class WalletOperationsTest {
     }
 
     @Test
-    public void depositWallet(){
-        WalletService walletService = new WalletService(1,dbServices);
+    public void depositWallet() throws Exception {
+        WalletService walletService = new WalletService(100,dbServices);
         walletService.createWallet("test");
-        walletService.deposit(10);
+        walletService.deposit(10.0);
         assertEquals(walletService.retrievalBalance(), 10.0, 0.0);
     }
 
     @Test
-    public void withdrawWallet(){
-        WalletService walletService = new WalletService(1,dbServices);
+    public void withdrawWallet() throws Exception {
+        WalletService walletService = new WalletService(100,dbServices);
         walletService.createWallet("test");
         walletService.deposit(100);
         walletService.withdraw(80);
@@ -42,17 +42,26 @@ public class WalletOperationsTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void depositNegative(){
-        WalletService walletService = new WalletService(2,dbServices);
+    public void depositNegative() throws Exception {
+        WalletService walletService = new WalletService(100,dbServices);
         walletService.createWallet("test");
         walletService.deposit(-10);
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void withdrawNegative(){
-        WalletService walletService = new WalletService(2,dbServices);
+    public void withdrawNegative() throws Exception {
+        WalletService walletService = new WalletService(100,dbServices);
         walletService.createWallet("test");
-        walletService.deposit(-10);
+        walletService.withdraw(-10);
     }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void notEnoughBalance() throws Exception {
+        WalletService walletService = new WalletService(100,dbServices);
+        walletService.createWallet("test");
+        walletService.deposit(10);
+        walletService.withdraw(16);
+    }
+
 
 }

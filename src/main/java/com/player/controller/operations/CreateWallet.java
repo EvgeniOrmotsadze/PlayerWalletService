@@ -28,8 +28,12 @@ public class CreateWallet extends HttpServlet{
         int playerId = Integer.parseInt(request.getParameter("player_id"));
         String walletName = request.getParameter("wallet_name");
         WalletService walletService = new WalletService(playerId, new DatabaseServiceImpl());
-        int code = walletService.createWallet(walletName);
-        System.out.println(code);
+        try {
+            walletService.createWallet(walletName);
+            response.getWriter().write("Create Successfully");
+        } catch (Exception e) {
+            response.getWriter().write(e.getMessage());
+        }
     }
 
 

@@ -27,7 +27,12 @@ public class Withdraw extends HttpServlet{
         int playerId = Integer.parseInt(request.getParameter("player_id"));
         double amount = Double.parseDouble(request.getParameter("amount"));
         WalletService walletService = new WalletService(playerId, new DatabaseServiceImpl());
-        walletService.withdraw(-amount);
+        try {
+            walletService.withdraw(amount);
+            response.getWriter().write("Withdraw Made Successfully");
+        } catch (Exception e) {
+            response.getWriter().write(e.getMessage());
+        }
     }
 
 

@@ -16,59 +16,60 @@ import java.util.List;
 
 public class DatabaseServiceImpl implements DatabaseService{
 
-     public int createWallet(Wallet wallet) {
+     public void createWallet(Wallet wallet) throws Exception {
         Connection conn = null;
         try {
             conn = DatabaseProvider.getConnection();
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new SQLException("can't open connection");
         }
-        String sql = "insert into wallet.player_wallet (player_id,balance,name) values (?,?,?)";
-        PreparedStatement ps = null;
-        try {
+         String sql = "select * from wallet.player_wallet where player_id = ?";
+         PreparedStatement ps = conn.prepareStatement(sql);
+         ps.setInt(1,wallet.getPlayerId());
+         ResultSet rs = ps.executeQuery();
+         if(rs.next()){
+             throw new Exception("already has wallet");
+         }
+         sql = "insert into wallet.player_wallet (player_id,balance,name) values (?,?,?)";
+         try {
             ps = conn.prepareStatement(sql);
             ps.setInt(1, wallet.getPlayerId());
             ps.setDouble(2, 0.0);
             ps.setString(3, wallet.getName());
-            int rs = ps.executeUpdate();
+            ps.executeUpdate();
             ps.close();
-            return rs;
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw  new Exception("can't update wallet");
         }
-        return 0;
     }
 
-    public int updateWallet(Wallet wallet){
+    public void updateWallet(Wallet wallet) throws SQLException {
         Connection conn = null;
         try {
             conn = DatabaseProvider.getConnection();
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new SQLException("can't open connection");
         }
-
         String sql = "update wallet.player_wallet set balance = ? where player_id = ?";
         PreparedStatement ps = null;
         try {
             ps = conn.prepareStatement(sql);
             ps.setDouble(1, wallet.getBalance());
             ps.setInt(2, wallet.getPlayerId());
-            int code = ps.executeUpdate();
+            ps.executeUpdate();
             ps.close();
-            return code;
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new SQLException("can't update wallet");
         }
-        return -1;
     }
 
-    public List<Wallet> getAllWallets(){
+    public List<Wallet> getAllWallets() throws SQLException {
         Connection conn = null;
         List<Wallet> wallets = new ArrayList<Wallet>();
         try {
             conn = DatabaseProvider.getConnection();
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new SQLException("can't open connection");
         }
         String sql = "select * from wallet.player_wallet ";
         try {
@@ -80,12 +81,11 @@ public class DatabaseServiceImpl implements DatabaseService{
                 wallet.setName(rs.getString("name"));
                 wallet.setPlayerId(rs.getInt("player_id"));
                 wallet.setBalance(rs.getDouble("balance"));
-
                 wallets.add(wallet);
             }
             ps.close();
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new SQLException("can't get all wallet");
         }
         return wallets;
     }

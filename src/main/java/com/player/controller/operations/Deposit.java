@@ -29,7 +29,12 @@ public class Deposit extends HttpServlet{
         double amount = Double.parseDouble(request.getParameter("amount"));
 
         WalletService walletService = new WalletService(playerId, new DatabaseServiceImpl());
-        walletService.deposit(amount);
+        try {
+            walletService.deposit(amount);
+            response.getWriter().write("Deposit Made Successfully");
+        } catch (Exception e) {
+            response.getWriter().write(e.getMessage());
+        }
     }
 
 

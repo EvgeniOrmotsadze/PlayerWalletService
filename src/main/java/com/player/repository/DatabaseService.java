@@ -2,6 +2,7 @@ package com.player.repository;
 
 import com.player.model.Wallet;
 
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -11,9 +12,9 @@ import java.util.List;
 
 public interface DatabaseService {
 
-    int createWallet(Wallet wallet);
+    void createWallet(Wallet wallet) throws Exception;
 
-    int updateWallet(Wallet wallet);
+    void updateWallet(Wallet wallet) throws SQLException;
 
-    List<Wallet> getAllWallets();
+    List<Wallet> getAllWallets() throws SQLException;
 }
