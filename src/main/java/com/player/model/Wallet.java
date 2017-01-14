@@ -7,16 +7,12 @@ package com.player.model;
 public class Wallet {
 
     private long id;
-    private long playerId;
+    private Integer playerId;
     private double balance;
     private String name;
 
 
     public Wallet(){}
-
-    public void createWallet(long playerId, double balance){
-
-    }
 
     public long getId() {
         return id;
@@ -27,11 +23,11 @@ public class Wallet {
     }
 
 
-    public long getPlayerId(){
-        return this.playerId;
+    public Integer getPlayerId() {
+        return playerId;
     }
 
-    public void setPlayerId(long playerId){
+    public void setPlayerId(Integer playerId) {
         this.playerId = playerId;
     }
 
@@ -52,13 +48,6 @@ public class Wallet {
         this.balance = balance;
     }
 
-    public void deposit(double amount){
-        this.balance += amount;
-    }
-
-    public void withdraw(double amount){
-        this.balance -= amount;
-    }
 
     @Override
     public String toString() {

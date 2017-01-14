@@ -9,7 +9,7 @@ import java.sql.SQLException;
  * Created by root_pc on 1/14/2017.
  * this is singleton design pattern for get connection
  */
-public class DBProvider {
+public class DatabaseProvider {
 
     static final String JDBC_DRIVER = "org.postgresql.Driver";
     static final String DB_URL = "jdbc:postgresql://localhost:5432/wallet";
@@ -25,7 +25,7 @@ public class DBProvider {
         dataSource.setPassword(PASS);
     }
 
-    private DBProvider() {
+    private DatabaseProvider() {
         //
     }
 

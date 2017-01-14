@@ -1,6 +1,7 @@
 package com.player.controller.operations;
 
-import com.player.repository.DBServices;
+import com.player.repository.DatabaseServiceImpl;
+import com.player.service.WalletService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -26,8 +27,8 @@ public class CreateWallet extends HttpServlet{
     protected void doGet(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
         int playerId = Integer.parseInt(request.getParameter("player_id"));
         String walletName = request.getParameter("wallet_name");
-        DBServices dbServices = new DBServices();
-        int code = dbServices.createWallet(playerId,walletName);
+        WalletService walletService = new WalletService(playerId, new DatabaseServiceImpl());
+        int code = walletService.createWallet(walletName);
         System.out.println(code);
     }
 

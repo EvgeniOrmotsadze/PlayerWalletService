@@ -1,7 +1,7 @@
 package com.player.controller.operations;
 
-import com.player.model.Wallet;
-import com.player.repository.DBServices;
+import com.player.repository.DatabaseServiceImpl;
+import com.player.service.WalletService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,7 +15,7 @@ import java.io.IOException;
  */
 
 @WebServlet("/showBalance")
-public class RetrievalBalance extends HttpServlet{
+public class RetrievalBalance extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
 
@@ -26,9 +26,9 @@ public class RetrievalBalance extends HttpServlet{
 
     protected void doGet(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
         int playerId = Integer.parseInt(request.getParameter("player_id"));
-        DBServices dbServices = new DBServices();
-        Wallet wallet = dbServices.getWallet(playerId);
-        System.out.println(wallet);
+        WalletService walletService = new WalletService(playerId, new DatabaseServiceImpl());
+        double amount = walletService.retrievalBalance();
+        System.out.println(amount);
     }
 
 
@@ -36,4 +36,7 @@ public class RetrievalBalance extends HttpServlet{
         doGet(request, response);
     }
 
+    public int doOperation(int amount) {
+        return 0;
+    }
 }

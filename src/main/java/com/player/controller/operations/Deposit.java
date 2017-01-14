@@ -1,6 +1,7 @@
 package com.player.controller.operations;
 
-import com.player.repository.DBServices;
+import com.player.repository.DatabaseServiceImpl;
+import com.player.service.WalletService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -26,11 +27,9 @@ public class Deposit extends HttpServlet{
     protected void doGet(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
         int playerId = Integer.parseInt(request.getParameter("player_id"));
         double amount = Double.parseDouble(request.getParameter("amount"));
-        if(amount >= 0) {
-            DBServices dbServices = new DBServices();
-            int code = dbServices.updateWallet(playerId,amount);
-            System.out.println(code);
-        }
+
+        WalletService walletService = new WalletService(playerId, new DatabaseServiceImpl());
+        walletService.deposit(amount);
     }
 
 

@@ -1,8 +1,11 @@
 com\player\controller\operations\CreateWallet.class
-com\player\repository\DBProvider.class
+com\player\repository\DatabaseServiceImpl.class
+com\player\service\WalletService.class
+com\player\repository\DatabaseProvider.class
 com\player\controller\operations\Deposit.class
 com\player\controller\operations\RetrievalBalance.class
-com\player\repository\DBServices.class
 com\player\controller\operations\Withdraw.class
 com\player\model\Wallet.class
+com\player\repository\DatabaseService.class
+com\player\service\MemoryCache.class
 com\player\controller\PlayerService.class

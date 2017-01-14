@@ -23,12 +23,18 @@
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
         <module name="PlayerWalletService" />
+      </profile>
+      <profile default="false" name="Annotation profile for PlayerWalletServices" enabled="true">
+        <sourceOutputDir name="target\generated-sources\annotations" />
+        <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
         <module name="PlayerWalletServices" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="PlayerWalletService" target="1.5" />
-      <module name="PlayerWalletServices" target="1.5" />
+      <module name="PlayerWalletServices" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
