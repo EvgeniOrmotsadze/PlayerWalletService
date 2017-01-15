@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.SQLException;
 
 /**
  * Created by root_pc on 1/14/2017.
@@ -24,18 +25,17 @@ public class Withdraw extends HttpServlet{
     }
 
     protected void doGet(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
-        int playerId = -1; double amount = 0.0;
         try {
-            playerId = Integer.parseInt(request.getParameter("player_id"));
-            amount = Double.parseDouble(request.getParameter("amount"));
-        }catch (Exception e){
-            response.getWriter().write("Incorrect Parameters");
-        }
-        WalletService walletService = new WalletService(playerId, new DatabaseServiceImpl());
-        try {
+            int playerId = Integer.parseInt(request.getParameter("player_id"));
+            double amount = Double.parseDouble(request.getParameter("amount"));
+            WalletService walletService = new WalletService(playerId, new DatabaseServiceImpl());
             walletService.withdraw(amount);
             response.getWriter().write("Withdraw Made Successfully");
-        } catch (Exception e) {
+        } catch (NumberFormatException e) {
+            response.getWriter().write("incorrect parameters");
+        } catch (IllegalArgumentException e) {
+            response.getWriter().write(e.getMessage());
+        } catch (SQLException e) {
             response.getWriter().write(e.getMessage());
         }
     }

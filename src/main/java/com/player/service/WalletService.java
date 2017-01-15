@@ -39,10 +39,14 @@ public class WalletService {
 
         //update in memory
         Wallet wallet = this.memoryCache.getWallet(playerId);
-        synchronized (wallet) {  // for thread safe
-            wallet.setBalance(wallet.getBalance() + amount);
-            //update in DB
-            dbServices.updateWallet(wallet);
+        if(wallet != null) {
+            synchronized (wallet) {  // for thread safe
+                wallet.setBalance(wallet.getBalance() + amount);
+                //update in DB
+                dbServices.updateWallet(wallet);
+            }
+        }else {
+            throw new IllegalArgumentException("Player ID : " + playerId + "  Doesn't Exist");
         }
     }
 
@@ -52,15 +56,19 @@ public class WalletService {
         }
 
         Wallet wallet = this.memoryCache.getWallet(playerId);
+        if(wallet != null) {
 
-        if (amount > wallet.getBalance()) {
-            throw new IllegalArgumentException("Not enough balance");
-        }
-        //update in memory
-        synchronized (wallet) { // for thread safe
-            wallet.setBalance(wallet.getBalance() - amount);
-            //update in DB
-            dbServices.updateWallet(wallet);
+            if (amount > wallet.getBalance()) {
+                throw new IllegalArgumentException("Not enough balance");
+            }
+            //update in memory
+            synchronized (wallet) { // for thread safe
+                wallet.setBalance(wallet.getBalance() - amount);
+                //update in DB
+                dbServices.updateWallet(wallet);
+            }
+        }else {
+            throw new IllegalArgumentException("Player ID : " + playerId + "  Doesn't Exist");
         }
     }
 
