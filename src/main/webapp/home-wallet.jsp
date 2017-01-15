@@ -19,7 +19,7 @@
 <h1>Player Wallet</h1>
   <div style="">
       <h3>Find Player By ID </h3> <input id="player_id_input" type="number" >
-  </input> <button id="player_search" class="button" onclick="clickSearch()">Search</button>
+  </input> <button id="player_search" class="button" onclick="findWallet()">Search</button>
   </div>
   <div id="createWallet">
      <h4>Doesn't Exist</h4>

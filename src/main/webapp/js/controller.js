@@ -1,5 +1,4 @@
-
-function clickSearch(){
+function findWallet(){
     document.getElementById("createWallet").style.display = 'none';
     document.getElementById("wallet").style.display = 'none';
     var player_id = document.getElementById("player_id_input").value;
@@ -33,7 +32,7 @@ function createNewWallet(){
         url:"/createWallet",
         data: {'player_id' : player_id},
         success: function (result) {
-            clickSearch();
+            findWallet();
         }
     });
 }
@@ -49,7 +48,7 @@ function doTransfers(){
         data: {'player_id' : player_id, 'amount':amount},
         success: function (result) {
             alert(result);
-            clickSearch();
+            findWallet();
         }
     });
 }
