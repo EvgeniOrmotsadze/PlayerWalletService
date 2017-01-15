@@ -30,12 +30,11 @@ public class DatabaseServiceImpl implements DatabaseService{
          if(rs.next()){
              throw new Exception("already has wallet");
          }
-         sql = "insert into wallet.player_wallet (player_id,balance,name) values (?,?,?)";
+         sql = "insert into wallet.player_wallet (player_id,balance) values (?,?)";
          try {
             ps = conn.prepareStatement(sql);
             ps.setInt(1, wallet.getPlayerId());
             ps.setDouble(2, 0.0);
-            ps.setString(3, wallet.getName());
             ps.executeUpdate();
             ps.close();
         } catch (SQLException e) {
@@ -78,7 +77,6 @@ public class DatabaseServiceImpl implements DatabaseService{
             while (rs.next()) {
                 Wallet wallet = new Wallet();
                 wallet.setId(rs.getInt("id"));
-                wallet.setName(rs.getString("name"));
                 wallet.setPlayerId(rs.getInt("player_id"));
                 wallet.setBalance(rs.getDouble("balance"));
                 wallets.add(wallet);
@@ -89,5 +87,6 @@ public class DatabaseServiceImpl implements DatabaseService{
         }
         return wallets;
     }
+
 
 }

@@ -1,0 +1,43 @@
+.button1{
+    border-radius: 5px;
+    height: 30px;
+    width: 50%;
+}
+.button{
+
+}
+
+#createWallet{
+    display: none;
+    width: 500px;
+    height: 30px;
+    margin-top: 30px;
+}
+
+#wallet{
+    display: none;
+}
+
+.main{
+    height: 200px;
+    width: 600px;
+    position: fixed;
+    top: 40%;
+    left: 50%;
+    margin-top: -100px;
+    margin-left: -200px;
+}
+
+#operationType{
+    float: left;
+    height: 25px;
+}
+
+#tb{
+
+    border-spacing: 3px;
+    border-color: gray;
+}
+.tables td{
+    text-align:center;
+}

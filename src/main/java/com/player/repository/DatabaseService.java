@@ -17,4 +17,5 @@ public interface DatabaseService {
     void updateWallet(Wallet wallet) throws SQLException;
 
     List<Wallet> getAllWallets() throws SQLException;
+
 }

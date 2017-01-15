@@ -7,7 +7,7 @@ import java.sql.SQLException;
 
 /**
  * Created by root_pc on 1/14/2017.
- * this is singleton design pattern for get connection
+ *
  */
 public class DatabaseProvider {
 

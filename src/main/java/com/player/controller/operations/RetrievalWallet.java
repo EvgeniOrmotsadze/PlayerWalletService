@@ -1,5 +1,6 @@
 package com.player.controller.operations;
 
+import com.player.model.Wallet;
 import com.player.repository.DatabaseServiceImpl;
 import com.player.service.WalletService;
 
@@ -14,25 +15,31 @@ import java.io.IOException;
  * Created by root_pc on 1/14/2017.
  */
 
-@WebServlet("/createWallet")
-public class CreateWallet extends HttpServlet{
+@WebServlet("/getWallet")
+public class RetrievalWallet extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
 
-    public CreateWallet() {
+    public RetrievalWallet() {
         super();
     }
 
 
     protected void doGet(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
         try {
-            int playerId = Integer.parseInt(request.getParameter("player_id"));
+            int playerId  = Integer.parseInt(request.getParameter("player_id"));
             WalletService walletService = new WalletService(playerId, new DatabaseServiceImpl());
-            walletService.createWallet();
-            response.getWriter().write("Create Successfully");
-        } catch (Exception e) {
-            response.getWriter().write("Not Created");
+            Wallet wallet = walletService.getWallet(playerId);
+            if(wallet != null) {
+                response.getWriter().write(wallet.getBalance() + "");
+            }else {
+                response.getWriter().write("Not Found");
+            }
+        }catch (NumberFormatException ex){
+            response.getWriter().write("Not Found");
         }
+
+
     }
 
 
@@ -40,4 +47,7 @@ public class CreateWallet extends HttpServlet{
         doGet(request, response);
     }
 
+    public int doOperation(int amount) {
+        return 0;
+    }
 }

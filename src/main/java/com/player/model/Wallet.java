@@ -9,7 +9,7 @@ public class Wallet {
     private long id;
     private Integer playerId;
     private double balance;
-    private String name;
+
 
 
     public Wallet(){}
@@ -31,13 +31,6 @@ public class Wallet {
         this.playerId = playerId;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public double getBalance(){
         return this.balance;

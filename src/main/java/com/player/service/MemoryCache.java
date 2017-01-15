@@ -7,6 +7,7 @@ import java.util.Map;
 
 /**
  * Created by root_pc on 1/14/2017.
+ * use singleton design pattern for get Memory hashMap
  */
 public class MemoryCache {
 
@@ -27,5 +28,6 @@ public class MemoryCache {
     public void putWallet(Integer playerId, Wallet wallet) {
         wallets.put(playerId, wallet);
     }
+
 
 }

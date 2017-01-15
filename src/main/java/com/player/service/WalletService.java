@@ -21,10 +21,9 @@ public class WalletService {
         this.memoryCache = MemoryCache.getInstance();
     }
 
-    public void createWallet(String walletName) throws Exception {
+    public void createWallet() throws Exception {
         Wallet wallet = new Wallet();
         wallet.setPlayerId(playerId);
-        wallet.setName(walletName);
         wallet.setBalance(0.0);
         //create in memory
         memoryCache.putWallet(playerId, wallet);
@@ -71,6 +70,11 @@ public class WalletService {
     public Double retrievalBalance(){
         Wallet wallet = this.memoryCache.getWallet(playerId);
         return wallet.getBalance();
+    }
+
+    public Wallet getWallet(int playerId){
+        Wallet wallet = this.memoryCache.getWallet(playerId);
+        return wallet;
     }
 
 }
