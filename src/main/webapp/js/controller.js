@@ -38,3 +38,19 @@ function createNewWallet(){
     });
 }
 
+function doTransfers(){
+    var player_id = document.getElementById("player_id_input").value;
+    var operationType =  document.getElementById("operationType").value;
+    var amount =  document.getElementById("operation_amount").value;
+    $.ajax({
+        type: 'POST',
+        async: true,
+        url:"/" + operationType,
+        data: {'player_id' : player_id, 'amount':amount},
+        success: function (result) {
+            alert(result);
+            clickSearch();
+        }
+    });
+}
+

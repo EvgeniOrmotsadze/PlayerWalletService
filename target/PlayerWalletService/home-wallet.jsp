@@ -42,12 +42,10 @@
             <td> <label>Amount : </label></td>
              <td> <input id="operation_amount" type="number" style="width: 78px;"> </input> </td>
           </tr>
-          <tr>
-          <td> </td>
-              <td><button id="doOperation" style="width: 78px;">Transfer</button></td>
-          </tr>
           </tbody>
       </table>
+      <div> <button id="doOperation" style="width: 78px; margin-left: 50px;" onclick="doTransfers()">Transfer</button>
+      </div>
   </div>
     <%--<label id="desc">  </label>--%>
     </div>

@@ -25,9 +25,13 @@ public class Deposit extends HttpServlet{
 
 
     protected void doGet(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
-        int playerId = Integer.parseInt(request.getParameter("player_id"));
-        double amount = Double.parseDouble(request.getParameter("amount"));
-
+        int playerId = -1; double amount = 0.0;
+        try {
+            playerId = Integer.parseInt(request.getParameter("player_id"));
+            amount = Double.parseDouble(request.getParameter("amount"));
+        }catch (Exception e){
+            response.getWriter().write("Incorrect Parameters");
+        }
         WalletService walletService = new WalletService(playerId, new DatabaseServiceImpl());
         try {
             walletService.deposit(amount);
