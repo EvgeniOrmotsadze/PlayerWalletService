@@ -44,7 +44,8 @@
           </tr>
           </tbody>
       </table>
-      <div> <button id="doOperation" style="width: 78px; margin-left: 50px;" onclick="doTransfers()">Transfer</button>
+      <div>
+          <button id="doOperation" style="width: 100px; margin-left: 50px;" onclick="doTransfers()">Transfer</button>
       </div>
   </div>
     <%--<label id="desc">  </label>--%>
