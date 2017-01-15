@@ -36,6 +36,9 @@ public class WalletService {
         if (amount < 0) {
             throw new IllegalArgumentException("Negative deposit doesn't supported");
         }
+        if(amount == 0){
+            throw new IllegalArgumentException("Zero deposit doesn't supported");
+        }
 
         //update in memory
         Wallet wallet = this.memoryCache.getWallet(playerId);
@@ -53,6 +56,9 @@ public class WalletService {
     public void withdraw(double amount) throws SQLException {
         if (amount < 0) {
             throw new IllegalArgumentException("Negative withdraw doesn't supported");
+        }
+        if(amount == 0){
+            throw new IllegalArgumentException("Zero withdraw doesn't supported");
         }
 
         Wallet wallet = this.memoryCache.getWallet(playerId);

@@ -64,5 +64,22 @@ public class WalletOperationsTest {
         walletService.withdraw(16);
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void zeroDeposit() throws Exception {
+        WalletService walletService = new WalletService(100,dbServices);
+        walletService.createWallet();
+        walletService.deposit(0.0);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void zeroWithdraw() throws Exception {
+        WalletService walletService = new WalletService(100,dbServices);
+        walletService.createWallet();
+        walletService.withdraw(0.0);
+    }
+
+
+
+
 
 }
